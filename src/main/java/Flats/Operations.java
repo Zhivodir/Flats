@@ -108,26 +108,19 @@ public class Operations {
                     num++;
                 }
             }
-//            for(int i = 1; i <= partsOfSelect.length; i++){
-//                if(partsOfSelect[i] != null) {
-//                    if (partsOfSelect[i] instanceof Integer) {
-//                        ps.setInt(num, (Integer) partsOfSelect[i]);
-//                    } else if (partsOfSelect[i] instanceof Double) {
-//                        ps.setDouble(num, (Double) partsOfSelect[i]);
-//                    } else if (partsOfSelect[i] instanceof String) {
-//                        ps.setString(num, partsOfSelect[i].toString());
-//                    }
-//                    num++;
-//                }
-//            }
+
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData md = rs.getMetaData();
-            System.out.println(md.getColumnCount());
-            System.out.println(rs.getRow());
-//            while (rs.next())
-//            {
-//
-//            }
+            for (int i = 1; i <= md.getColumnCount(); i++)
+                System.out.print(md.getColumnName(i) + "\t\t");
+            System.out.println();
+
+            while (rs.next()) {
+                for (int i = 1; i <= md.getColumnCount(); i++) {
+                    System.out.print(rs.getString(i) + "\t\t");
+                }
+                System.out.println();
+            }
             rs.close();
             ps.close();
         }catch (SQLException e){e.printStackTrace();}
