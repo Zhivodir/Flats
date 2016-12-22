@@ -62,7 +62,7 @@ public class Operations {
             case 4:
                 int numOfRoom = Integer.parseInt(sc.nextLine());
                 isWhere();
-                select.append(" numOfRoom=?");
+                select.append(" rooms=?");
                 partsOfSelect[4] = numOfRoom;
                 break;
             case 5:
@@ -106,6 +106,7 @@ public class Operations {
                         ps.setString(num, object.toString());
                     }
                     num++;
+                }
             }
 //            for(int i = 1; i <= partsOfSelect.length; i++){
 //                if(partsOfSelect[i] != null) {
@@ -122,21 +123,10 @@ public class Operations {
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData md = rs.getMetaData();
             System.out.println(md.getColumnCount());
-            while (rs.next())
-            {
-                System.out.println(rs.getCursorName());
-            }
-//            ResultSetMetaData md = rs.getMetaData();
+            System.out.println(rs.getRow());
+//            while (rs.next())
+//            {
 //
-//            for (int i = 1; i <= md.getColumnCount(); i++)
-//                System.out.print(md.getColumnName(i) + "\t\t");
-//            System.out.println();
-//
-//            while (rs.next()) {
-//                for (int i = 1; i <= md.getColumnCount(); i++) {
-//                    System.out.print(rs.getString(i) + "\t\t");
-//                }
-//                System.out.println();
 //            }
             rs.close();
             ps.close();
