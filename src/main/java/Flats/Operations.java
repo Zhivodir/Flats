@@ -24,6 +24,7 @@ public class Operations {
         select.append("SELECT * FROM flats");
 
         while(true){
+            System.out.println();
             System.out.println("Choice a parameter for add to the query:");
             System.out.println("1.District");
             System.out.println("2.Address");
@@ -42,30 +43,35 @@ public class Operations {
     public void select(int choice){
         switch (choice){
             case 1:
+                System.out.println("Enter a district:");
                 String district = sc.nextLine();
                 isWhere();
                 select.append(" district=?");
                 partsOfSelect[1] = district;
                 break;
             case 2:
+                System.out.println("Enter an address:");
                 String address = sc.nextLine();
                 isWhere();
                 select.append(" address=?");
                 partsOfSelect[2] = address;
                 break;
             case 3:
+                System.out.println("Enter an area:");
                 Double area = Double.parseDouble(sc.nextLine());
                 isWhere();
                 select.append(" area=?");
                 partsOfSelect[3] = area;
                 break;
             case 4:
+                System.out.println("Enter a rooms:");
                 int numOfRoom = Integer.parseInt(sc.nextLine());
                 isWhere();
                 select.append(" rooms=?");
                 partsOfSelect[4] = numOfRoom;
                 break;
             case 5:
+                System.out.println("Enter a price:");
                 int price = Integer.parseInt(sc.nextLine());
                 isWhere();
                 select.append(" price=?");
@@ -77,6 +83,11 @@ public class Operations {
             case 7:
                 sendQuery();
                 break;
+            case 8:
+                clearQuery();
+                break;
+            default:
+                break;
         }
 
     }
@@ -85,6 +96,8 @@ public class Operations {
         if(where != true) {
             select.append(" WHERE");
             where = true;
+        }else{
+            select.append("AND ");
         }
     }
 
@@ -124,5 +137,10 @@ public class Operations {
             rs.close();
             ps.close();
         }catch (SQLException e){e.printStackTrace();}
+    }
+
+    public void clearQuery(){
+        select.delete(0, select.length());
+        select.append("SELECT * FROM flats");
     }
 }
